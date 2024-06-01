@@ -17,7 +17,7 @@ def get_page(url):
     """获取页面源码"""
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36',
-        'Cookie': 'Cookie自己获取，不懂看图片或者百度'
+        'Cookie': 'aQQ_ajkguid=AD62AE16-233D-023B-7E2E-90AE85E5C0D3; ctid=141; ajk-appVersion=; id58=CrIW6mZTXsugC/GRiFblAg==; sessid=E4A285FF-CFD8-7E2B-F6DB-AAD0140333E5; obtain_by=2; twe=2; fzq_h=4abfc01c71f62f6ee6cebd0e5cab6feb_1717207065493_4941e4a46b154c87936091a2ac32e409_664091769; fzq_js_anjuke_xiaoqu_pc=d8ada2b326d1905506075016a7ee7416_1717207074000_23; xxzl_cid=a25a1ec5d68d4e41b7134aa8c29b1a21; xxzl_deviceid=hNy90/JuOGOScYcgBxB5i+LCNdVrWxA8il0UNHKQFnPygTdo6RKiSDdZGnpCz/Vu'
     }
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
@@ -25,13 +25,13 @@ def get_page(url):
 
 
 def get_houses_url(html):
-    """获取一页中的房子URL，只包括以'https://chengdu.anjuke.com/community/view/'开头的链接"""
+    """获取一页中的房子URL，只包括以'https://xinxiang.anjuke.com/community/view/'开头的链接"""
     doc = pq(html)
     target_div = doc('.list-cell')
     urls = []
     for a in target_div('a').items():
         url = a.attr('href')
-        if url.startswith('https://chengdu.anjuke.com/community/view/') and not url.endswith('/jiedu/'):
+        if url.startswith('https://xinxiang.anjuke.com/community/view/') and not url.endswith('/jiedu/'):
             urls.append(url)
     return urls
 
@@ -78,13 +78,13 @@ def get_house_info(html):
 def main():
     """因为只显示50页需要更改m3101（8000元）m3102（8000以上）自己看着设置，还有range(1, 51)如果只有2页那就是range(1, 8)"""
     """                                              注意    注意                                              注意 """
-    urls_1 = ['https://chengdu.anjuke.com/community/jinniu/m3103-p' + str(i) + '/#filtersort' for i in range(14, 29)]
-    """urls_2 = ['https://chengdu.anjuke.com/community/gaoxin/m3102-p' + str(i) + '/#filtersort' for i in range(1, 51)]
-    urls_3 = ['https://chengdu.anjuke.com/community/gaoxin/m3103-p' + str(i) + '/#filtersort' for i in range(1, 51)]
-    urls_4 = ['https://chengdu.anjuke.com/community/gaoxin/m3104-p' + str(i) + '/#filtersort' for i in range(1, 51)]
-    urls_5 = ['https://chengdu.anjuke.com/community/gaoxin/m3105-p' + str(i) + '/#filtersort' for i in range(1, 51)]
-    urls_6 = ['https://chengdu.anjuke.com/community/gaoxin/m3106-p' + str(i) + '/#filtersort' for i in range(1, 51)]
-    urls_7 = ['https://chengdu.anjuke.com/community/gaoxin/m3107-p' + str(i) + '/#filtersort' for i in range(1, 51)]"""
+    urls_1 = ['https://xinxiang.anjuke.com/community/jinniu/m3103-p' + str(i) + '/#filtersort' for i in range(14, 29)]
+    """urls_2 = ['https://xinxiang.anjuke.com/community/gaoxin/m3102-p' + str(i) + '/#filtersort' for i in range(1, 51)]
+    urls_3 = ['https://xinxiang.anjuke.com/community/gaoxin/m3103-p' + str(i) + '/#filtersort' for i in range(1, 51)]
+    urls_4 = ['https://xinxiang.anjuke.com/community/gaoxin/m3104-p' + str(i) + '/#filtersort' for i in range(1, 51)]
+    urls_5 = ['https://xinxiang.anjuke.com/community/gaoxin/m3105-p' + str(i) + '/#filtersort' for i in range(1, 51)]
+    urls_6 = ['https://xinxiang.anjuke.com/community/gaoxin/m3106-p' + str(i) + '/#filtersort' for i in range(1, 51)]
+    urls_7 = ['https://xinxiang.anjuke.com/community/gaoxin/m3107-p' + str(i) + '/#filtersort' for i in range(1, 51)]"""
     urls = urls_1
     count = 0
 
